@@ -41,7 +41,7 @@ class HamPizzaHandler {
     cookPizza() {
         console.log('cook a ham pizza for 3 minutes');
     }
-};
+}
 class SeafoodPizzaHandler {
     getPizzaIngredients() {
         console.log('get 5 shrimps to cook a seafood pizza');
@@ -49,7 +49,7 @@ class SeafoodPizzaHandler {
     cookPizza() {
         console.log('cook a seafood pizza for 5 minutes');
     }
-};
+}
 class VeggiePizzaHandler {
     getPizzaIngredients() {
         console.log('get 2 cucumbers to cook a veggie pizza');
@@ -57,7 +57,7 @@ class VeggiePizzaHandler {
     cookPizza() {
         console.log('cook a veggie pizza for 2 minutes');
     }
-};
+}
 class UnregisteredPizzaHandler {
     getPizzaIngredients() {
         console.log('no ingredient for that kind of pizza');
@@ -84,12 +84,7 @@ class PizzaHandlerFactory {
 }
 
 /**
- * Instead of having an abstract class, we have a mixin class to force pizza handlers to implement each method.
- * Sicne JavaScript is not a strict type checking language like Java, we do not need to have it.
- * This mixin is like an interface.
- * Every time a new handler is added, all we need to do is add methods of this mixin to the new handler and implement them.
- * It can be a singleton class since it does not need to have any status.
- * We would not cover how to make it a singleton class.
+ * This is a mixin handling all behavior for pizza.
  */
 class PizzaHandlerMixin {
     initializer() {}
@@ -107,7 +102,7 @@ class PizzaHandlerMixin {
     cookPizza (type) {
         PizzaHandlerFactory.getPizzaHandler(type).cookPizza();
     }
-};
+}
 
 /**
  * Stock stores ingredients for pizza
@@ -119,7 +114,7 @@ class Stock extends aggregation(Object, PizzaHandlerMixin) {
     checkAvailability(ingredient) {
         console.log('Checking how many of ' + ingredient + ' we have...');
     }
-};
+}
 
 /**
  * Chef cooks pizza
@@ -136,7 +131,7 @@ class Chef extends aggregation(Object, PizzaHandlerMixin) {
         this.stock.getPizzaIngredients(type);
         this.cookPizza(type);
     }
-};
+}
 
 var chef = new Chef();
 chef.makePizza(HAM_PIZZA);
